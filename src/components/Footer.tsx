@@ -30,9 +30,12 @@ export function Footer({ citationsRef }: FooterProps) {
                 <p>Spence, Robert. (1993). Human factors in interactive graphics. Computer-Aided Design. 25. 671-676.</p>
                 <p>Rashid, Richard & Robertson, George. (1981). Accent: A Communication Oriented Network Operating System Kernel. Proc. Eighth ACM Symp. Operating Systems Principles. 64-75.</p>
                 <p><a href="https://yusufarslan.net/sites/yusufarslan.net/files/upload/content/Miller1968.pdf" className="text-blue-500 hover:underline">Miller, Robert. (1968). Response time in man-computer conversational transactions.</a></p>
+                          
+            <details ref={citationsRef} className="text-sm text-gray-600 print:open">
+
                 <summary className="cursor-pointer font-medium print:hidden">CSM Academic Brief: </summary>
-                   <div className="mt-2 p-4 bg-white rounded-lg shadow text-xs">
-                    <h3>The Critical Impact of User Interface Design on Business System Productivity</h3>
+                <div className="mt-2 p-4 bg-white rounded-lg shadow text-xs">
+                <h3>The Critical Impact of User Interface Design on Business System Productivity</h3>
                 
                 <h4>Introduction</h4>
                 <p>In the modern business landscape, the efficiency of human-to-business-system interfaces plays a crucial role in overall productivity. While consumer-facing applications have long prioritized user experience, many business systems lag behind, focusing primarily on functionality at the expense of usability. This paper examines the current challenges in business system interfaces and explores the significant impact of system response times on user productivity.
@@ -61,18 +64,33 @@ export function Footer({ citationsRef }: FooterProps) {
                      <p>These benefits are inherent in the computing situation and do not depend on the type of work being done, as demonstrated by the diversity of environments in which they have been observed.</p>
                 <br/>
                 <h5>Quantifying the Productivity Impact</h5>
-                  <b><p> Using the Equation: Y = a* LOG(x)+b </p></b><br/>
+                  <b><p> Using the Equation: Y = LN(1/b)+a </p></b>
+                     <br/>
                      
               <ol>
-                <li> Y is Productivity (tasks per minute over a given EPT measurement</li>
-                <li> a is the variable representing the specific theoretical maximum interactions/min at a specific EPT, given a true limiatation of 60 transactions/minute, and a human thought and personal action time reduction. For example, the maximum Transactions/min then would be 60 divided by EPT. So, at 3.0 EPT, Actual max = 20. To account for human thought and movement timing averages we take 25% of this true maximum and create the theoretical max of 5 actions/min at 3.0 EPT giving us a roundabout estimate, that will be used to calculate the logarithmic adjusted max with the EPT equation.</li>
+                <li> Y is the output variable representing Productivity (tasks per minute possible at a given EPT measurement)</li>
+                <li> a is the variable representing the specific theoretical maximum interactions/min at a specific EPT for a user at a given expertise level, given a limitation of 1 click/second maximum for business usage, with a thought and familiarity basic reduction to go from absolute maximum to theoretical maximum. For example, the maximum Transactions/min then would be 60 divided by EPT. So, at 3.0 EPT, Actual max = 20. To account for human response and system familiarity and movement, for a beginner user: 25% of this true maximum, 30% for Average users, 32.5% for Experts (create the theoretical max of 5 actions/min at 3.0 EPT giving us a roundabout estimate, that will be used to calculate the logarithmic adjusted max with the EPT equation).</li>
                 <li> b is the variable representing EPT in seconds (Required Entry as key variable and X-Intercept</li>
-                <li> x is the variable representing the theoretical actions per minute (a) divided by the EPT at hand (b) = a[0] / b[0] (where [0] represents the first coordinate in the array of measured coordinates at the entered EPT value - there's consdideration here for using slightly more precise LN((a[0]-a[1])/(b[0]-b[1])), to draw the curve and pinpoint middling EPTs, like 1.23 </li>
-              
-              
+                <li> Y is then the natural logarithm when EPT is known. When charted, this creates a Logarithmic decay curve as EPT increases, similar to a radio-active half-life. </li>
               </ol>
-              </div>
-            </div>
+
+             <h5>The Impact of Data Silos, UX Design Strategy, Conditional Lazy Loading, and Data Architecture on System Performance</h5>
+                     <p> Data silos significantly impact system response times and user productivity in several ways:  </p>
+                     <ol>
+                       <li> Increased Query Complexity: When important contextual data is scattered across hard-to-find notes or associated records within the same system, it necessitates more complex query logic, leading to higher EPT.</li>
+                       <li> Unstructured Data Challenges: Notes and other unstructured string data types are often lost for all intents and purposes unless explicitly developed for. More advanced systems, such as vectorDB utilization with retrieval-enabled generative AI, can bring this data into context but at the cost of increased load time.</li> 
+                       <li> Off-System Data Access: Data residing in external systems requires API calls, introducing additional call times and third-party EPT, further slowing down the overall system response. While data silos are often inevitable, organizations should focus heavily on data integrity and architecture to ensure fast loads. </li>
+                       <li> UI Design UX Strategy: implementing simplified and dynamically changing user interfaces can help avoid the need for erroneous loads.</li>
+                       <li> Conditional Lazy Loading: utilizing the details of user journeys for a role and with record stage focused milestones, LEX can enable simpler, easier to use, and much faster loading interfaces with clear high-impact next click.</li>
+                       <li> Data Architecture Best Practices: utilizing Data architecture best practices for lists, reports, queries, and architectural design,  orgs can avoid concurrencies, timeouts, api call time, page and component load times, and eliminate row lock errors.</li>
+                     </ol>
+                 <h5>Conclusion and Recommendations: </h5>
+                     <p>The design of human-to-business-system interfaces has a profound impact on employee productivity and overall business efficiency. By prioritizing human-centric design principles and optimizing system response times, orgs can capitalize on positive reinforcement models which help reward their employees with ease of out performance, the ability to enter flow state, regularly, and avoid a distracting and difficult productivity environment. </p>
+                     <p>Customers can look forward and improve EPT and productivity results by running engagements to conduct thorough business process mapping to understand human needs fully. Discover exactly what a human does, step by step, for each macro-task and micro-task before designing a better UI. To address these challenges, businesses should:businesses can unlock significant productivity gains. As demonstrated by the logarithmic relationship between response times and productivity, even small improvements in system performance can yield substantial benefits. Prioritize user experience in business system design, focusing on simplicity and efficiency. Consider Google.com as an exemplar of simplicity, singularity, clarity, beauty, and speed in interface design. Optimize EPT to stay as close to the 300ms threshold as possible (use the EPT clock in Sandboxes). Design interfaces that support micro-task completion rather than solely focusing on macro processes. Invest in resolving data silos and improving data processing efficiency. This may involve utilizing Signature architects to assist with reliability and especially ADRs for architectural issues, build better queries, improve database indices, and implement effective archival processes, etc.. Eliminate unneeded components and focus on essential elements. For example, in customer service scenarios, agents should focus solely on the queue, conversation context, and AI-generated recommendations. Regularly assess and optimize system performance based on user feedback and productivity metrics. By addressing these areas, businesses can create more effective human-to-business-system interfaces, leading to improved employee satisfaction, increased productivity, and ultimately, better business outcomes </p>
+                   
+                   </div>
+                   
+                   </div>
           </details>
         </div>
       </div>
